@@ -1,6 +1,7 @@
 import React from 'react'
 import TweetList from './TweetList'
 import NewTweet from './NewTweet'
+import * as api from '../api'
 
 const tweets = [
   {
@@ -28,15 +29,17 @@ class MainPanel extends React.Component {
   }
 
   addNewTweet(newTweet) {
-    this.setState(prevState => ({
-      tweets: [
-        ...prevState.tweets,
-        {
-          ...newTweet,
-          id: prevState.tweets.length,
-        },
-      ],
-    }))
+    api.addNewTweet(newTweet)
+      .then(newTweet =>
+        this.setState(prevState => ({
+          tweets: [
+            ...prevState.tweets,
+            {
+              ...newTweet,
+              id: prevState.tweets.length,
+            },
+          ],
+        })))
   }
 
   render() {
