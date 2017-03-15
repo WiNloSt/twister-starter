@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'cheap-eval-source-map',
   entry: [
     // activate HRM for React
     'react-hot-loader/patch',
