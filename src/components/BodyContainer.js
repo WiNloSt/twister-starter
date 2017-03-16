@@ -4,15 +4,18 @@ import Profile from './Profile'
 
 import * as api from '../api'
 
+const nameMap = {
+  kaizerwing: `P' Ping`,
+  topscores: `P' Top`
+}
+
 class BodyContainer extends React.Component {
   static propTypes = {
-    pageUsername: React.PropTypes.string,
-    pageName: React.PropTypes.string
+    match: React.PropTypes.object
   }
 
   state = {
-    username: 'kelvin',
-    name: 'Mahatthana Nomsawadi',
+    username: 'topscores',
     tweets: [],
     numFollowers: 0,
     numFollowings: 0,
@@ -40,18 +43,17 @@ class BodyContainer extends React.Component {
       }))
 
     if (this.state.isFollowing) {
-      api.unfollow(this.props.pageUsername, this.state.username)
+      api.unfollow(this.props.match.params.pageUsername, this.state.username)
         .catch(toggleFollowState)
     } else {
-      api.follow(this.props.pageUsername, this.state.username)
+      api.follow(this.props.match.params.pageUsername, this.state.username)
         .catch(toggleFollowState)
     }
 
     toggleFollowState()
   }
 
-  componentDidMount() {
-    const pageUsername = this.props.pageUsername || this.state.username
+  fetchData = (pageUsername) => {
     const filter = {
       where: {
         username: pageUsername
@@ -76,6 +78,16 @@ class BodyContainer extends React.Component {
       })))
   }
 
+  componentDidMount() {
+    const pageUsername = this.props.match.params.pageUsername || this.state.username
+    this.fetchData(pageUsername)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const pageUsername = nextProps.match.params.pageUsername || this.state.username
+    this.fetchData(pageUsername)
+  }
+
   render() {
     const {
       tweets,
@@ -83,8 +95,8 @@ class BodyContainer extends React.Component {
       numFollowings,
       isFollowing
     } = this.state
-    const name = this.props.pageUsername ? this.props.pageName : this.state.name
-    const username = this.props.pageUsername || this.state.username
+    const username = this.props.match.params.pageUsername || this.state.username
+    const name = nameMap[username]
 
     return (
       <div className='container body'>
@@ -95,14 +107,14 @@ class BodyContainer extends React.Component {
             numTweets={tweets.length}
             numFollowers={numFollowers}
             numFollowings={numFollowings}
-            isOwnProfile={this.state.username === this.props.pageUsername}
+            isOwnProfile={this.state.username === this.props.match.params.pageUsername}
             isFollowing={isFollowing}
             toggleFollow={this.toggleFollow}
           />
         </div>
         <MainPanel
           tweets={this.state.tweets}
-          name={this.state.name}
+          name={name}
           username={this.state.username}
           addNewTweet={this.addNewTweet}
           enableTweet={username === this.state.username} />
