@@ -8,9 +8,9 @@ export const addNewTweet = newTweet =>
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     mode: 'cors',
-    body: JSON.stringify(newTweet),
+    body: JSON.stringify(newTweet)
   })
   .then(res => res.json())

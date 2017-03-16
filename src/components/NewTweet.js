@@ -11,7 +11,7 @@ class NewTweet extends React.Component {
     addNewTweet({
       name,
       username,
-      tweetText,
+      tweetText
     })
     this.setState(prevState => ({
       tweetText: ''
@@ -38,22 +38,22 @@ class NewTweet extends React.Component {
 
   render() {
     return (
-      <div className="new-tweet">
-        <form className="form-horizontal">
-          <div className="form-group">
-            <div className="tweet-text col-sm-10">
+      <div className='new-tweet'>
+        <form className='form-horizontal'>
+          <div className='form-group'>
+            <div className='tweet-text col-sm-10'>
               <input
-                type="text"
-                id="tweetText"
-                className="form-control"
+                type='text'
+                id='tweetText'
+                className='form-control'
                 placeholder="What's happening"
                 value={this.state.tweetText}
                 onChange={this.handleOnChange}
                 onKeyDown={this.handleOnKeydown}
               />
             </div>
-            <div className="col-sm-2">
-              <input type="button" className="btn btn-default" value="Tweet" onClick={this.handleOnClick} />
+            <div className='col-sm-2'>
+              <input type='button' className='btn btn-default' value='Tweet' onClick={this.handleOnClick} />
             </div>
           </div>
         </form>
@@ -65,7 +65,7 @@ class NewTweet extends React.Component {
 NewTweet.propTypes = {
   name: React.PropTypes.string.isRequired,
   username: React.PropTypes.string.isRequired,
-  addNewTweet: React.PropTypes.func.isRequired,
+  addNewTweet: React.PropTypes.func.isRequired
 }
 
 export default NewTweet

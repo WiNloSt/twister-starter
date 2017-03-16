@@ -12,11 +12,11 @@ const TweetList = ({ tweets }) => (
 )
 
 TweetList.propTypes = {
-  tweets: React.PropTypes.arrayOf(React.PropTypes.object),
+  tweets: React.PropTypes.arrayOf(React.PropTypes.object)
 }
 
 TweetList.defaultProps = {
-  tweets: [],
+  tweets: []
 }
 
 export default TweetList

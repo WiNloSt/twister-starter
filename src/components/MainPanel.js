@@ -8,13 +8,13 @@ const tweets = [
     id: 0,
     name: 'Proyood ChanOlala',
     username: 'Prayood-Naruk',
-    tweetText: 'roa ja tum tarm sun ya',
+    tweetText: 'roa ja tum tarm sun ya'
   }, {
     id: 1,
     name: 'Tolaer Jung',
     username: 'NatKungzInwZa007',
-    tweetText: 'Pim Thai Mai dai ka',
-  },
+    tweetText: 'Pim Thai Mai dai ka'
+  }
 ]
 
 class MainPanel extends React.Component {
@@ -23,7 +23,7 @@ class MainPanel extends React.Component {
     this.state = {
       tweets,
       username: 'kelvin',
-      name: 'Mahatthana Nomsawadi',
+      name: 'Mahatthana Nomsawadi'
     }
     this.addNewTweet = this.addNewTweet.bind(this)
   }
@@ -36,9 +36,9 @@ class MainPanel extends React.Component {
             ...prevState.tweets,
             {
               ...newTweet,
-              id: prevState.tweets.length,
-            },
-          ],
+              id: prevState.tweets.length
+            }
+          ]
         })))
   }
 
@@ -55,6 +55,5 @@ class MainPanel extends React.Component {
     )
   }
 }
-
 
 export default MainPanel
