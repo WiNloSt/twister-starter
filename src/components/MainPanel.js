@@ -4,14 +4,10 @@ import NewTweet from './NewTweet'
 import * as api from '../api'
 
 class MainPanel extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tweets: [],
-      username: 'kelvin',
-      name: 'Mahatthana Nomsawadi'
-    }
-    this.addNewTweet = this.addNewTweet.bind(this)
+  state = {
+    tweets: [],
+    username: 'kelvin',
+    name: 'Mahatthana Nomsawadi'
   }
 
   componentDidMount() {
@@ -28,7 +24,7 @@ class MainPanel extends React.Component {
       )
   }
 
-  addNewTweet(newTweet) {
+  addNewTweet = (newTweet) => {
     api.addNewTweet(newTweet)
       .then(newTweet =>
         this.setState(prevState => ({
