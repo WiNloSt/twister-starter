@@ -7,8 +7,7 @@ import * as api from '../api'
 class BodyContainer extends React.Component {
   static propTypes = {
     pageUsername: React.PropTypes.string,
-    pageName: React.PropTypes.string,
-    enableTweet: React.PropTypes.bool
+    pageName: React.PropTypes.string
   }
 
   state = {
@@ -84,8 +83,9 @@ class BodyContainer extends React.Component {
       numFollowings,
       isFollowing
     } = this.state
-    const name = this.props.pageUsername || this.state.name
+    const name = this.props.pageName || this.state.name
     const username = this.props.pageUsername || this.state.username
+
     return (
       <div className='container body'>
         <div className='left-panel'>
@@ -105,7 +105,7 @@ class BodyContainer extends React.Component {
           name={this.state.name}
           username={this.state.username}
           addNewTweet={this.addNewTweet}
-          enableTweet={this.props.enableTweet} />
+          enableTweet={username === this.state.username} />
       </div>
     )
   }
