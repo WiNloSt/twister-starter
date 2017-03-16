@@ -3,29 +3,29 @@ import TweetList from './TweetList'
 import NewTweet from './NewTweet'
 import * as api from '../api'
 
-const tweets = [
-  {
-    id: 0,
-    name: 'Proyood ChanOlala',
-    username: 'Prayood-Naruk',
-    tweetText: 'roa ja tum tarm sun ya'
-  }, {
-    id: 1,
-    name: 'Tolaer Jung',
-    username: 'NatKungzInwZa007',
-    tweetText: 'Pim Thai Mai dai ka'
-  }
-]
-
 class MainPanel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tweets,
+      tweets: [],
       username: 'kelvin',
       name: 'Mahatthana Nomsawadi'
     }
     this.addNewTweet = this.addNewTweet.bind(this)
+  }
+
+  componentDidMount() {
+    const filter = {
+      where: {
+        username: 'kelvin'
+      }
+    }
+    api.fetchTweets(filter)
+      .then(tweets =>
+        this.setState(() => ({
+          tweets
+        }))
+      )
   }
 
   addNewTweet(newTweet) {

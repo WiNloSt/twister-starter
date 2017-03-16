@@ -14,3 +14,7 @@ export const addNewTweet = newTweet =>
     body: JSON.stringify(newTweet)
   })
   .then(res => res.json())
+
+export const fetchTweets = filter =>
+  fetch(baseURL + '/api/Tweets' + (filter ? '?filter=' + JSON.stringify(filter) : ''))
+    .then(res => res.json())
