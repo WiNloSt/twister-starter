@@ -83,7 +83,7 @@ class BodyContainer extends React.Component {
       numFollowings,
       isFollowing
     } = this.state
-    const name = this.props.pageName || this.state.name
+    const name = this.props.pageUsername ? this.props.pageName : this.state.name
     const username = this.props.pageUsername || this.state.username
 
     return (

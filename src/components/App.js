@@ -5,8 +5,8 @@ import BodyContainer from './BodyContainer'
 const App = () => (
   <MainLayout>
     <BodyContainer
-      pageUsername=''
-      pageName='' />
+      pageUsername='kaizerwing'
+      pageName='P Ping ja' />
   </MainLayout>
 )
 
