@@ -81,7 +81,7 @@ export const follow = (username, followedUsername) => new Promise((resolve, reje
 })
 
 export const unfollow = (username, followedUsername) => new Promise((resolve, reject) => {
-  const uri = `${baseURL}/api/Follows/upsertWithWhere?where={"username":"${username}","followedUsername":"${followedUsername}"}`
+  const uri = `${baseURL}/api/Follows/upsertWithWhere?where={"username":"${username}", "followedUsername":"${followedUsername}"}`
   fetch(uri, {
     method: 'POST',
     headers: {

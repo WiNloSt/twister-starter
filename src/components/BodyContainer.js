@@ -13,7 +13,7 @@ class BodyContainer extends React.Component {
 
   state = {
     username: 'kelvin',
-    name: 'Kelvin ja',
+    name: 'Mahatthana Nomsawadi',
     tweets: [],
     numFollowers: 0,
     numFollowings: 0,
@@ -35,9 +35,20 @@ class BodyContainer extends React.Component {
   }
 
   toggleFollow = () => {
-    this.setState(prevState => ({
-      isFollowing: !prevState.isFollowing
-    }))
+    const toggleFollowState = () =>
+      this.setState(prevState => ({
+        isFollowing: !prevState.isFollowing
+      }))
+
+    if (this.state.isFollowing) {
+      api.unfollow(this.props.pageUsername, this.state.username)
+        .catch(toggleFollowState)
+    } else {
+      api.follow(this.props.pageUsername, this.state.username)
+        .catch(toggleFollowState)
+    }
+
+    toggleFollowState()
   }
 
   componentDidMount() {
