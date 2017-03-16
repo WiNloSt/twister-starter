@@ -84,13 +84,14 @@ class BodyContainer extends React.Component {
       numFollowings,
       isFollowing
     } = this.state
-
+    const name = this.props.pageUsername || this.state.name
+    const username = this.props.pageUsername || this.state.username
     return (
       <div className='container body'>
         <div className='left-panel'>
           <Profile
-            name={this.props.pageName}
-            username={this.props.pageUsername}
+            name={name}
+            username={username}
             numTweets={tweets.length}
             numFollowers={numFollowers}
             numFollowings={numFollowings}
