@@ -17,7 +17,7 @@ class MainPanel extends React.Component {
   componentDidMount() {
     const filter = {
       where: {
-        username: 'kelvin'
+        username: this.state.username
       }
     }
     api.fetchTweets(filter)
