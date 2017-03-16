@@ -6,13 +6,14 @@ import * as api from '../api'
 
 class BodyContainer extends React.Component {
   static propTypes = {
-    ownerUsername: React.PropTypes.string,
+    pageUsername: React.PropTypes.string,
+    pageName: React.PropTypes.string,
     enableTweet: React.PropTypes.bool
   }
 
   state = {
     username: 'kelvin',
-    name: 'Mahatthana Nomsawadi',
+    name: 'Kelvin ja',
     tweets: [],
     numFollowers: 0,
     numFollowings: 0,
@@ -40,9 +41,10 @@ class BodyContainer extends React.Component {
   }
 
   componentDidMount() {
+    const pageUsername = this.props.pageUsername || this.state.username
     const filter = {
       where: {
-        username: this.state.username
+        username: pageUsername
       }
     }
     api.fetchTweets(filter)
@@ -51,6 +53,17 @@ class BodyContainer extends React.Component {
           tweets
         }))
       )
+
+    api.fetchProfile(pageUsername)
+      .then(profile => this.setState(prevState => ({
+        numFollowers: profile.numFollowers,
+        numFollowings: profile.numFollowings
+      })))
+
+    api.fetchFollowStatus(pageUsername, this.state.username)
+      .then(isFollowing => this.setState(prevState => ({
+        isFollowing
+      })))
   }
 
   render() {
@@ -65,12 +78,12 @@ class BodyContainer extends React.Component {
       <div className='container body'>
         <div className='left-panel'>
           <Profile
-            name='name'
-            username='username'
+            name={this.props.pageName}
+            username={this.props.pageUsername}
             numTweets={tweets.length}
             numFollowers={numFollowers}
             numFollowings={numFollowings}
-            isOwnProfile={false}
+            isOwnProfile={this.state.username === this.props.pageUsername}
             isFollowing={isFollowing}
             toggleFollow={this.toggleFollow}
           />
@@ -80,7 +93,7 @@ class BodyContainer extends React.Component {
           name={this.state.name}
           username={this.state.username}
           addNewTweet={this.addNewTweet}
-          enableTweet />
+          enableTweet={this.props.enableTweet} />
       </div>
     )
   }
