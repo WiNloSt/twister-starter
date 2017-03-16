@@ -8,7 +8,6 @@ const ProfileFollow = ({
   <div className='action last-section'>
     <button
       onClick={handleToggleFollow}
-      type='button'
       className={classNames('btn btn-lg', isFollowing ? 'btn-danger' : 'btn-default')}
     >
       {isFollowing ? 'Unfollow' : 'Follow'}

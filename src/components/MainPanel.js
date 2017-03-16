@@ -1,59 +1,28 @@
 import React from 'react'
 import TweetList from './TweetList'
 import NewTweet from './NewTweet'
-import * as api from '../api'
 
 class MainPanel extends React.Component {
   static propTypes = {
-    enableTweet: React.PropTypes.bool
-  }
-
-  state = {
-    tweets: [],
-    username: 'kelvin',
-    name: 'Mahatthana Nomsawadi'
-  }
-
-  componentDidMount() {
-    const filter = {
-      where: {
-        username: this.state.username
-      }
-    }
-    api.fetchTweets(filter)
-      .then(tweets =>
-        this.setState(() => ({
-          tweets
-        }))
-      )
-  }
-
-  addNewTweet = (newTweet) => {
-    api.addNewTweet(newTweet)
-      .then(newTweet =>
-        this.setState(prevState => ({
-          tweets: [
-            ...prevState.tweets,
-            {
-              ...newTweet,
-              id: prevState.tweets.length
-            }
-          ]
-        })))
+    enableTweet: React.PropTypes.bool,
+    tweets: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    name: React.PropTypes.string.isRequired,
+    username: React.PropTypes.string.isRequired,
+    addNewTweet: React.PropTypes.func.isRequired
   }
 
   render() {
     return (
       <div className='main-panel'>
         {
-          this.props.enableTweet ?
-            <NewTweet
-              name={this.state.name}
-              username={this.state.username}
-              addNewTweet={this.addNewTweet}
+          this.props.enableTweet
+            ? <NewTweet
+              name={this.props.name}
+              username={this.props.username}
+              addNewTweet={this.props.addNewTweet}
             /> : ''
         }
-        <TweetList tweets={this.state.tweets} />
+        <TweetList tweets={this.props.tweets} />
       </div>
     )
   }
